@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <!-- Main plugin class -->
+    <class>org.iottly.openfire.plugin.HTTPForwardPlugin</class>
+    <name>HTTP Forward</name>
+    <description>Forwards message packets to an HTTP endpoint</description>
+    <author>Stefano Terna</author>
+    <version>0.3.1</version>
+    <date>07/01/2014</date>
+    <minServerVersion>3.9.0</minServerVersion>
+</plugin>

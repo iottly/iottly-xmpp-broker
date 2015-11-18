@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <title>Packet Filter Plugin Readme</title>
+    <style type="text/css">
+        BODY {
+            box-sizing: border-box;
+            font-size : 100%;
+        }
+        BODY, TD, TH {
+            font-family : tahoma, verdana, arial, helvetica, sans-serif;
+            font-size : 0.8em;
+        }
+        code {
+            font-family: monospace;
+            font-size: 1.4em;
+            background-color: #eee;
+            margin: 1em;
+            display: block;
+            padding: .5em;
+            border-radius: 4px;
+        }
+        H2 {
+             font-size : 10pt;
+             font-weight : bold;
+        }
+        A:hover {
+            text-decoration : none;
+        }
+        H1 {
+            font-family : tahoma, arial, helvetica, sans-serif;
+            font-size : 1.4em;
+            font-weight: bold;
+            border-bottom : 1px #ccc solid;
+            padding-bottom : 2px;
+        }
+
+        TT {
+            font-family : courier new;
+            font-weight : bold;
+            color : #060;
+        }
+        PRE {
+            font-family : courier new;
+            font-size : 100%;
+        }
+        #datatable TH {
+            color : #fff;
+            background-color : #2A448C;
+            text-align : left;
+        }
+        #datatable TD {
+            background-color : #FAF6EF;
+        }
+        #datatable .name {
+            background-color : #DCE2F5;
+        }
+    </style>
+</head>
+<body>
+<h1>Licence</h1>
+<p>Copyright 2015 Stefano Terna</p>
+<p>Licensed under the Apache License, Version 2.0 (the "License");you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+
+
+<h1>Installation instructions</h1>
+<ol>
+<li> Clone the openfire git repo
+    <code>git clone https://github.com/igniterealtime/Openfire.git</code></li>
+<li>  cd Openfire/src/plugins</li>
+<li> Clone the plugin repository
+    <code>git clone https://github.com/iottly/iottly-httpforward.git</code></li>
+<li> Go back to the root repo directory Openfire</li>
+<li> make plugins</li>
+<li> upload httpforward.jar in the plugins tab of the openfire admin console (found in Openfire/work/plugins/httpforward.jar)</li> 
+</ol>
+<br/>
+<h1>Configuration</h1>
+<p>The plugin is configurable via system properties (Defined in Server > Server Manager > System Properties in the openfire admin console)</p>
+<p>The following properties are defined:</p>
+<ul>
+	<li>plugin.httpforward.target - The default url of the endpoint to post messages to</li>
+	<li>plugin.httpforward.allowedRecipients - A comma separated list of message recipients to forward</li>
+	<li>plugin.httpforward.recipientRoutes - A comma separated list of key values defining a map from recipients to target URLs to forward to (i.e. username,url,username,url,username,url)</li>
+</ul>
+<br/>
+<h1>Filtering and forwarding</h1>
+<p>All messages are passed through a filtering mechanism that determines if that message is to be forwarded or not. This mechanism works as follows:</p>
+<ul>
+	<li>Check to see if the allowedRecipients property is defined, if not forward</li>
+	<li>Check if the message recipient is in the set of allowed recipients</li>
+	<li>If the recipient is not in the list of allowed recipients, do not forward the message</li>
+	<li>If the recipient is not in the sender's roster, do not forward the message</li>
+</ul>
+<p>Once it has been decided that the message should be forwarded, determine the targetURL where to forward the message. </p>
+<ul>
+  <li>Check if the recipient is in the recipient routes map</li>
+  <li>If so, forward the address that the map contains</li>
+  <li>If not, forward to the default address defined in targetURL</li>
+</ul>
+
+<br/>
+<h1>Fault tolerance and retries</h1>
+<p>Messages that need forwarding are placed in a queue by the plugin. A concurrent consumer thread reads from the blocking queue and
+ attempts to post the message to the target url. If the post returns an HTTP status code 200, the consumer thread continues consuming 
+ the messages in the queue. </p>
+ <p> If the consumer thread receives any other status code, it attempts to resend the message until it succeeds with an exponentially growing delay interval.</p>
+
+
+</body>
+</html>
