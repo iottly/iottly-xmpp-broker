@@ -28,15 +28,15 @@ The configuration data is added statically to the container, so that, after alte
 # Preloaded plugins
 The configuration comes with preloaded Openfire plugins:
 
-|Plugin             | Description                                                                                    | Version   | Author                     |
-|-------------------|------------------------------------------------------------------------------------------------|-----------|----------------------------|
-|Client Control     | Controls clients allowed to connect and available features                                     | 01.02.00  | Jive Software              |
-|HTTP Forward       | Forwards message packets to an HTTP endpoint                                                   | 00.03.01  | Stefano Terna              |
-|Presence Service   | Exposes presence information through HTTP.                                                     | 01.06.00  | Jive Software              |
-|Registration       | Performs various actions whenever a new user account is created.                               | 01.06.00  | Ryan Graham                |
-|User Creation      | Creates users and populates rosters.                                                           | 01.02.00  | Jive Software              |
-|User Import Export | Enables import and export of user data                                                         | 02.04.00  | Ryan Graham                |
-|User Service       | (Deprecated) Please use the REST API Plugin. Allows administration of users via HTTP requests. | 02.00.02  | Roman Soldatow Justin Hunt |
+|Plugin             | Description                                                                                                    | Version   | Author                     |
+|-------------------|----------------------------------------------------------------------------------------------------------------|-----------|----------------------------|
+|Client Control     | Controls clients allowed to connect and available features                                                     | 01.02.00  | Jive Software              |
+|HTTP Forward       | Forwards message packets to an HTTP endpoint [iottly-httpforward(https://github.com/iottly/iottly-httpforward)]| 00.03.01  | Stefano Terna              |
+|Presence Service   | Exposes presence information through HTTP.                                                                     | 01.06.00  | Jive Software              |
+|Registration       | Performs various actions whenever a new user account is created.                                               | 01.06.00  | Ryan Graham                |
+|User Creation      | Creates users and populates rosters.                                                                           | 01.02.00  | Jive Software              |
+|User Import Export | Enables import and export of user data                                                                         | 02.04.00  | Ryan Graham                |
+|User Service       | (Deprecated) Please use the REST API Plugin. Allows administration of users via HTTP requests.                 | 02.00.02  | Roman Soldatow Justin Hunt |
 
 
 # Configuration
