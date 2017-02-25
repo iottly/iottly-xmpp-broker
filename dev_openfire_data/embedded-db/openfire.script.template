@@ -55,6 +55,7 @@ GRANT DBA TO SA
 SET WRITE_DELAY 1
 SET SCHEMA PUBLIC
 INSERT INTO OFUSER VALUES('admin',NULL,'065515dd9913ee1107691f5c6b40ce2d22b53f8a7a44d673','Administrator','admin@${XMPP_DOMAIN}','001447418237559','0')
+INSERT INTO OFUSER VALUES('${XMPP_USERNAME}',NULL,'${XMPP_PASSWORD_ENC}','iottly-core user','${XMPP_USERNAME}@${XMPP_DOMAIN}','001447418237559','0')
 INSERT INTO OFID VALUES(18,6)
 INSERT INTO OFID VALUES(19,16)
 INSERT INTO OFID VALUES(23,1)
@@ -72,7 +73,7 @@ INSERT INTO OFPROPERTY VALUES('plugin.httpforward.target','${HTTPFORWARD_TARGET}
 INSERT INTO OFPROPERTY VALUES('plugin.restapi.allowedIPs','')
 INSERT INTO OFPROPERTY VALUES('plugin.restapi.enabled','true')
 INSERT INTO OFPROPERTY VALUES('plugin.restapi.httpAuth','secret')
-INSERT INTO OFPROPERTY VALUES('plugin.restapi.secret','EKdj6y0USG4tP4Ki')
+INSERT INTO OFPROPERTY VALUES('plugin.restapi.secret','${XMPP_MGMT_REST_SECRET}')
 INSERT INTO OFPROPERTY VALUES('plugin.userservice.secret','z1Ypo83E')
 INSERT INTO OFPROPERTY VALUES('provider.admin.className','org.jivesoftware.openfire.admin.DefaultAdminProvider')
 INSERT INTO OFPROPERTY VALUES('provider.auth.className','org.jivesoftware.openfire.auth.DefaultAuthProvider')

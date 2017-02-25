@@ -20,10 +20,13 @@ MAINTAINER iottly
 RUN apt-get update -y
 RUN apt-get install -y gettext-base
 
-ENV OPENFIRE_FIREUP_DIR=/var/lib/openfirefireup    \
-	XMPP_DOMAIN=xmppbroker.localdev.iottly.org     \
-    HTTPFORWARD_ALLOWEDRECIPIENTS=                 \
-    HTTPFORWARD_RECIPIENTROUTES=                   \
+ENV OPENFIRE_FIREUP_DIR=/var/lib/openfirefireup                                          \
+	XMPP_DOMAIN=xmppbroker.localdev.iottly.org                                           \
+	XMPP_USERNAME=iottlycore                                                             \
+	XMPP_PASSWORD_ENC=0a7581473c8979a9798b339b77817129e6b29fdb87cecd240e16e1ae666d7464   \
+	XMPP_MGMT_REST_SECRET=EKdj6y0USG4tP4Ki												 \
+    HTTPFORWARD_ALLOWEDRECIPIENTS=                                                       \
+    HTTPFORWARD_RECIPIENTROUTES=                                                         \
     HTTPFORWARD_TARGET=http://iottlycore:8520/msg
 
 
