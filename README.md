@@ -46,4 +46,4 @@ The following env variables are interpolated by the `entrypoint.sh` script into 
 - `HTTPFORWARD_TARGET` - The default url of the endpoint to post messages to (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
 - `HTTPFORWARD_ALLOWEDRECIPIENTS` - A comma separated list of message recipients to forward (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
 - `HTTPFORWARD_RECIPIENTROUTES` - A comma separated list of key values defining a map from recipients to target URLs to forward to (i.e. username,url,username,url,username,url) (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
-- `XMPP_DOMAIN` - the domain of the broker (e.g. `JID = [some username]@${XMPP_DOMAIN})
+- `XMPP_DOMAIN` - the domain of the broker (e.g. `JID = [some username]@${XMPP_DOMAIN}`)
