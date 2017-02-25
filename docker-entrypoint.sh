@@ -18,10 +18,16 @@ initialize_data_dir() {
   # if persisted cofiguration is missing migrates data volume directory structure from fireup DIR
   if [[ ! -f ${OPENFIRE_DATA_DIR}/configured ]]; then
     echo "Migrating existing data..."
+    
     chown -R ${OPENFIRE_USER}:${OPENFIRE_USER} ${OPENFIRE_FIREUP_DIR}
-    sudo -HEu ${OPENFIRE_USER} mv ${OPENFIRE_FIREUP_DIR}/conf ${OPENFIRE_DATA_DIR}/conf
-    sudo -HEu ${OPENFIRE_USER} mv ${OPENFIRE_FIREUP_DIR}/plugins ${OPENFIRE_DATA_DIR}/plugins
-    sudo -HEu ${OPENFIRE_USER} mv ${OPENFIRE_FIREUP_DIR}/embedded-db ${OPENFIRE_DATA_DIR}/embedded-db
+    sudo -HEu ${OPENFIRE_USER} cp -rf ${OPENFIRE_FIREUP_DIR}/conf ${OPENFIRE_DATA_DIR}
+    sudo -HEu ${OPENFIRE_USER} cp -rf ${OPENFIRE_FIREUP_DIR}/plugins ${OPENFIRE_DATA_DIR}
+    sudo -HEu ${OPENFIRE_USER} cp -rf ${OPENFIRE_FIREUP_DIR}/embedded-db ${OPENFIRE_DATA_DIR}
+
+    echo "replacing env variables in SQL init script..."
+    sudo -HEu ${OPENFIRE_USER} cat ${OPENFIRE_DATA_DIR}/embedded-db/openfire.script.template | envsubst > ${OPENFIRE_DATA_DIR}/embedded-db/openfire.script
+    sudo -HEu ${OPENFIRE_USER} rm ${OPENFIRE_DATA_DIR}/embedded-db/openfire.script.template
+
     sudo -HEu ${OPENFIRE_USER} touch ${OPENFIRE_DATA_DIR}/configured
   fi
 

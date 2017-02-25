@@ -17,7 +17,15 @@
 FROM sameersbn/openfire:latest
 MAINTAINER iottly
 
-ENV OPENFIRE_FIREUP_DIR=/var/lib/openfirefireup
+RUN apt-get update -y
+RUN apt-get install -y gettext-base
+
+ENV OPENFIRE_FIREUP_DIR=/var/lib/openfirefireup    \
+	XMPP_DOMAIN=xmppbroker.localdev.iottly.org     \
+    HTTPFORWARD_ALLOWEDRECIPIENTS=                 \
+    HTTPFORWARD_RECIPIENTROUTES=                   \
+    HTTPFORWARD_TARGET=http://iottlycore:8520/msg
+
 
 COPY docker-entrypoint.sh /sbin/entrypoint.sh
 

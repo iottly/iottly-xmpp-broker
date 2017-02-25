@@ -25,6 +25,8 @@ The configuration data is added statically to the container, so that, after alte
 - `docker-compose rm xmppbroker`
 - `./start_iottly_locally.sh`
 
+This behaviour changes if the `/var/lib/openfire` directory is mounted from a host volume: in this case it is persisted and the configuration is taken from `dev_openfire_data` only during the first fireup of the container.
+
 # Preloaded plugins
 The configuration comes with preloaded Openfire plugins:
 
@@ -40,16 +42,8 @@ The configuration comes with preloaded Openfire plugins:
 
 
 # Configuration
-- access to local Openfire web console:
-  - user: `admin`
-  - password: `admin`
-- broker XMPP domain:
-  - `xmppbroker.localdev.iottly.org`
-- iottly-core connection to the broker:
-  - JID: `iottlycore@xmppbroker.localdev.iottly.org`
-  - password: `iottlycore`
-- container emulated remote device connection to the broker:
-  - JID: `raspdev.0001@xmppbroker.localdev.iottly.org`
-  - password: `raspdev.0001`
-
-
+The following env variables are interpolated by the `entrypoint.sh` script into the database init script file (so that they can be overridden by the compose configuration):
+- `HTTPFORWARD_TARGET` - The default url of the endpoint to post messages to (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
+- `HTTPFORWARD_ALLOWEDRECIPIENTS` - A comma separated list of message recipients to forward (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
+- `HTTPFORWARD_RECIPIENTROUTES` - A comma separated list of key values defining a map from recipients to target URLs to forward to (i.e. username,url,username,url,username,url) (ref [iottly-httpforward](https://github.com/iottly/iottly-httpforward))
+- `XMPP_DOMAIN` - the domain of the broker (e.g. `JID = [some username]@${XMPP_DOMAIN})
