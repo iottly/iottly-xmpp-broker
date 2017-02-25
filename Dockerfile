@@ -17,10 +17,8 @@
 FROM sameersbn/openfire:latest
 MAINTAINER iottly
 
+ENV OPENFIRE_FIREUP_DIR=/var/lib/openfirefireup
 
-#RUN mkdir /var
-#RUN mkdir /var/lib
-#RUN mkdir /var/lib/openfire
+COPY docker-entrypoint.sh /sbin/entrypoint.sh
 
-ADD /dev_openfire_data /var/lib/openfire
-
+ADD /dev_openfire_data ${OPENFIRE_FIREUP_DIR}
